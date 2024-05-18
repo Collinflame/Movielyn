@@ -1,0 +1,6 @@
+extends ../layout
+
+block content
+    include ../mixins/movieForm
+    div.content
+        +movieForm(movie, 'Update', `/movie/${movie.id}/edit`, `/movie/${movie.id}`, `/movie/${movie.id}/delete`)

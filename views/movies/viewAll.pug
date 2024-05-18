@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+    include ../mixins/movieCard
+    div.movies-header
+        div.movie-header-title Here's What's Poppin' &#129305 &#128074 &#128378 &#128083 &#128175
+        div
+            if user
+                a.button.primary(href='/movie/add') Write New Review &#128235
+
+    ul.movie-list
+        each movie in movies
+            li
+                +movieCard(movie)

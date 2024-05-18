@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+    include ../mixins/comment
+    div.container.movie
+        div.content
+            div.movie-header-row
+                h1.movie-title=movie.title
+                if user && movie.isOwnedBy(user)
+                    a.button(class='moveit' href=`/movie/${movie.id}/edit`) Edit
+                if user && movie.isOwnedBy(user)
+                    a.button(class='deleteit' href=`/movie/${movie.id}/delete`) Delete
+                else if user && user.is('Admin')
+                    a.button(class='deleteit2' href=`/movie/${movie.id}/delete`) Delete
+            p.published-on Published
+                strong.emphasize #{movie.friendlyPublishedDate}
+                | by
+                if movie.author.role_id === '2'
+                    strong.emphasize #{movie.author.username} &#11088
+                else
+                    strong.emphasize #{movie.author.username}
+            div.section
+                img.poster(src=movie.poster)
+                div.section2
+                    p.movie-header-title=movie.subject
+                    p.movie-body=movie.review
+
+            div.comment-section
+                h3.comment-section-title Comments (#{movie.comments.length})
+                div.comment-form
+                    form(action=`/movie/${movie.id}/comment/create` method='post')
+                        div.input-container.wide
+                            label(for='author_username').form-label Your name
+                            input(type='text' name='author_username' id='author_username' required=true)
+                        div.input-container.wide
+                            textarea(placeholder='Your comment here...' required=true name='body' id='body' cols='80' rows='5')
+                        div
+                            button.button.primary(type='submit') Comment
+
+                ul.comment-list
+                    each comment in movie.comments
+                        li
+                            +comment(comment)

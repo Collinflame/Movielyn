@@ -1,0 +1,13 @@
+mixin movieCard(movie)
+    a.card(href=`/movie/${movie.id}`)
+        img.card-image(src=movie.poster)
+        div.card-body
+            div.card-title=movie.title
+            p.published-on Published
+                strong.emphasize #{movie.friendlyPublishedDate}
+                | by
+                if movie.author.role_id === '2'
+                    strong.emphasize #{movie.author.username} &#11088
+                else
+                    strong.emphasize #{movie.author.username}
+            div.card-hook=movie.subject

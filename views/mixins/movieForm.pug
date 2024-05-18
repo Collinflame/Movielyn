@@ -1,0 +1,17 @@
+mixin movieForm(movie, buttonText, saveUrl, cancelUrl, deleteUrl)
+    a(href="https://www.themoviedb.org/" target="_blank" class="link") Posters Link
+    form(action=saveUrl method='post')
+        div.input-container.wide
+            label(for='title').form-label Title
+            input(type='text' name='title' id='title' required=true placeholder='Movie Title' value=movie.title)
+        div.input-container.super-wide
+            label(for='subject').form-label Intro
+            input(type='text' name='subject' id='subject' required=true placeholder='Something catchy to reel them in...' value=movie.subject)
+        div.input-container.super-wide
+            label(for='poster').form-label Poster URL
+            input(type='text' name='poster' id='poster' required=true value=movie.poster)
+        div.input-container
+            label(for='review').form-label
+            textarea(name='review' id='review' rows=20 cols=100 placeholder='Long ago in a galaxy far far away...') #{movie.review}
+        a.button(href=cancelUrl  class='cancel') Cancel
+        button.button.primary(type='submit') #{buttonText}

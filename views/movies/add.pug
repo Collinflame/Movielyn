@@ -1,0 +1,6 @@
+extends ../layout
+
+block content
+    include ../mixins/movieForm
+    div.content
+        +movieForm(movie, 'Publish', '/movie/add', '/', null)
